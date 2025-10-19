@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --silent
+RUN npm install --silent
 
 # Copy source code
 COPY . .
@@ -31,7 +31,8 @@ RUN addgroup -g 1001 -S nodejs && \
     chown -R nodejs:nodejs /usr/share/nginx/html && \
     chown -R nodejs:nodejs /var/cache/nginx && \
     chown -R nodejs:nodejs /var/log/nginx && \
-    chown -R nodejs:nodejs /etc/nginx/conf.d
+    chown -R nodejs:nodejs /etc/nginx/conf.d && \
+    chown -R nodejs:nodejs /tmp
 
 # Switch to non-root user
 USER nodejs
