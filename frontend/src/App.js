@@ -1,10 +1,15 @@
 import React from 'react';
+import FileExplorer from './components/FileExplorer';
 
 function App() {
   return (
     <div className="App">
-      <h1>Test Report Dashboard</h1>
-      <p>Coming soon...</p>
+      <header>
+        <h1>Test Report Dashboard</h1>
+      </header>
+      <main>
+        <FileExplorer />
+      </main>
     </div>
   );
 }
