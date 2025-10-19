@@ -1,0 +1,254 @@
+.file-item {
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+  user-select: none;
+}
+
+.file-item.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.file-item.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  min-height: 120px;
+  text-align: center;
+}
+
+.file-item.grid:hover {
+  border-color: #9ca3af;
+  background-color: #f9fafb;
+}
+
+.file-icon-container {
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.file-icon {
+  font-size: 2.5rem;
+  display: block;
+  line-height: 1;
+}
+
+.download-button {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-item.grid:hover .download-button {
+  opacity: 1;
+}
+
+.download-button:hover {
+  background-color: #2563eb;
+}
+
+.file-info {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.file-name {
+  font-weight: 500;
+  color: #111827 !important;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  color: #374151;
+  margin-top: 0.25rem;
+}
+
+.file-item.list {
+  display: grid;
+  grid-template-columns: 1fr 80px 120px 80px;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  gap: 1rem;
+  min-height: 60px;
+}
+
+.file-item.list:hover {
+  background-color: #f9fafb;
+}
+
+.file-name-column {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.file-item.list .file-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.file-item.list .file-name {
+  font-size: 0.875rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-size-column {
+  font-size: 0.8rem;
+  color: #374151;
+  text-align: center;
+  min-width: 80px;
+}
+
+.file-modified-column {
+  font-size: 0.8rem;
+  color: #374151;
+  text-align: center;
+  min-width: 120px;
+}
+
+.file-actions-column {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-button {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  padding: 0.375rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-button:hover:not(:disabled) {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.file-item:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.file-item.selected {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.file-item.selected .file-name {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .file-item.grid {
+    padding: 0.75rem;
+    min-height: 100px;
+  }
+  
+  .file-icon {
+    font-size: 2rem;
+  }
+  
+  .file-name {
+    font-size: 0.8rem;
+  }
+  
+  .file-size {
+    font-size: 0.7rem;
+  }
+  
+  .file-item.list {
+    grid-template-columns: 1fr 80px;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .file-modified-column {
+    display: none;
+  }
+  
+  .file-actions-column {
+    gap: 0.25rem;
+  }
+  
+  .action-button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .file-item.grid {
+    padding: 0.5rem;
+    min-height: 90px;
+  }
+  
+  .file-icon {
+    font-size: 1.75rem;
+  }
+  
+  .file-name {
+    font-size: 0.75rem;
+  }
+  
+  .file-item.list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .file-size-column {
+    display: none;
+  }
+  
+  .file-actions-column {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}

@@ -1,0 +1,291 @@
+/* LoadingSpinner.css - Loading spinner component styles */
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 200px;
+}
+
+.loading-spinner.small {
+  padding: 1rem;
+  min-height: 100px;
+}
+
+.loading-spinner.medium {
+  padding: 2rem;
+  min-height: 200px;
+}
+
+.loading-spinner.large {
+  padding: 3rem;
+  min-height: 300px;
+}
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #2196F3;
+  border-radius: 50%;
+}
+
+.loading-spinner.small .spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+.loading-spinner.large .spinner {
+  width: 56px;
+  height: 56px;
+  border-width: 5px;
+}
+
+
+.spinner-message {
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  max-width: 200px;
+  line-height: 1.4;
+}
+
+.loading-spinner.small .spinner-message {
+  font-size: 0.8rem;
+  max-width: 150px;
+}
+
+.loading-spinner.large .spinner-message {
+  font-size: 1rem;
+  max-width: 250px;
+}
+
+/* Pulsing animation for message */
+.spinner-message {
+}
+
+/* Alternative spinner styles */
+.spinner.dots {
+  width: auto;
+  height: auto;
+  border: none;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.spinner.dots::before,
+.spinner.dots::after,
+.spinner.dots {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: #2196F3;
+  border-radius: 50%;
+}
+
+.spinner.dots::before {
+}
+
+.spinner.dots::after {
+}
+
+/* Bars spinner */
+.spinner.bars {
+  width: 40px;
+  height: 40px;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.spinner.bars::before,
+.spinner.bars::after {
+  content: '';
+  width: 6px;
+  background-color: #2196F3;
+}
+
+.spinner.bars::before {
+  height: 20px;
+}
+
+.spinner.bars::after {
+  height: 20px;
+}
+
+/* Overlay spinner */
+.loading-spinner.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(255, 255, 255, 0.9); */
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+
+/* Inline spinner */
+.loading-spinner.inline {
+  display: inline-flex;
+  padding: 0;
+  min-height: auto;
+  vertical-align: middle;
+}
+
+.loading-spinner.inline .spinner {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.loading-spinner.inline .spinner-message {
+  font-size: 0.875rem;
+  margin-left: 0.5rem;
+}
+
+
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    border-top-color: #2196F3;
+  }
+  
+
+  
+  .spinner.dots::before,
+  .spinner.dots::after,
+  .spinner.dots {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  .spinner.bars::before,
+  .spinner.bars::after {
+    height: 20px;
+    transform: scaleY(1);
+  }
+  
+  .loading-spinner.overlay {
+    backdrop-filter: none;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .loading-spinner {
+    padding: 1.5rem;
+    min-height: 150px;
+  }
+  
+  .loading-spinner.large {
+    padding: 2rem;
+    min-height: 200px;
+  }
+  
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+  }
+  
+  .loading-spinner.large .spinner {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+  
+  .spinner-message {
+    font-size: 0.8rem;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loading-spinner {
+    padding: 1rem;
+    min-height: 120px;
+  }
+  
+  .spinner {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .spinner-message {
+    font-size: 0.75rem;
+    max-width: 150px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .loading-spinner {
+    display: none;
+  }
+}
+
+/* Accessibility */
+.loading-spinner[aria-label] {
+  /* Screen reader accessible */
+}
+
+.spinner {
+  /* Ensure spinner is not focusable */
+  pointer-events: none;
+}
+
+/* Custom color variants */
+.loading-spinner.success .spinner {
+  border-top-color: #10b981;
+}
+
+.loading-spinner.warning .spinner {
+  border-top-color: #f59e0b;
+}
+
+.loading-spinner.error .spinner {
+  border-top-color: #ef4444;
+}
+
+.loading-spinner.success .spinner.dots::before,
+.loading-spinner.success .spinner.dots::after,
+.loading-spinner.success .spinner.dots {
+  background-color: #10b981;
+}
+
+.loading-spinner.warning .spinner.dots::before,
+.loading-spinner.warning .spinner.dots::after,
+.loading-spinner.warning .spinner.dots {
+  background-color: #f59e0b;
+}
+
+.loading-spinner.error .spinner.dots::before,
+.loading-spinner.error .spinner.dots::after,
+.loading-spinner.error .spinner.dots {
+  background-color: #ef4444;
+}
+
+/* Smooth transitions */
+.loading-spinner {
+}
+
+.loading-spinner.fade-out {
+  opacity: 0;
+}
+
+.loading-spinner.fade-in {
+  opacity: 1;
+}

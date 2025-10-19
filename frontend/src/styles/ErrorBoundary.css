@@ -1,0 +1,230 @@
+/* ErrorBoundary.css - Error boundary component styles */
+
+.error-boundary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f8fafc;
+}
+
+.error-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 3rem 2rem;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.error-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.error-title {
+  color: #dc2626;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.error-message {
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primary-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.primary-button:hover {
+  background-color: #1976D2;
+}
+
+.primary-button:active {
+}
+
+.secondary-button {
+  background-color: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.secondary-button:hover {
+  background-color: #e2e8f0;
+  border-color: #cbd5e1;
+}
+
+.secondary-button:active {
+}
+
+.error-details {
+  margin-top: 2rem;
+  text-align: left;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.error-details summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: #475569;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.error-details summary:hover {
+  background-color: #f1f5f9;
+}
+
+.error-details[open] summary {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+.error-stack {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.error-stack h4 {
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 1rem 0 0.5rem 0;
+  font-family: inherit;
+}
+
+.error-stack h4:first-child {
+  margin-top: 0;
+}
+
+.error-stack pre {
+  background-color: #1f2937;
+  color: #f9fafb;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .error-boundary {
+    padding: 1rem;
+    min-height: 100vh;
+  }
+  
+  .error-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .error-title {
+    font-size: 1.25rem;
+  }
+  
+  .error-message {
+    font-size: 0.875rem;
+  }
+  
+  .error-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .error-stack {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .error-icon {
+    font-size: 2.5rem;
+  }
+  
+  .error-title {
+    font-size: 1.125rem;
+  }
+  
+  .error-details {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+  }
+}
+
+
+
+
+
+/* Print styles */
+@media print {
+  .error-boundary {
+    background: white;
+  }
+  
+  .error-container {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  .error-actions {
+    display: none;
+  }
+  
+  .error-details {
+    background: transparent;
+  }
+  
+  .error-stack pre {
+    background: transparent;
+    color: #000;
+    border: 1px solid #000;
+  }
+}

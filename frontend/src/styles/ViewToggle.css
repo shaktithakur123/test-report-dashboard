@@ -1,0 +1,389 @@
+/* ViewToggle.css - View toggle component styles */
+
+.view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Segmented Toggle Styles */
+.view-toggle.segmented-toggle {
+  display: inline-flex;
+  gap: 0;
+}
+
+.toggle-group {
+  display: inline-flex;
+  background-color: #f1f5f9;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 2px;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.toggle-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #6b7280;
+  border: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 32px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.toggle-option:hover {
+  color: #374151;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.toggle-option.active {
+  background-color: #ffffff;
+  color: #1f2937;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+}
+
+.toggle-option.active:hover {
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+/* Focus states for toggle */
+.toggle-option:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+  z-index: 2;
+}
+
+.toggle-option:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.view-toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 36px;
+}
+
+.view-toggle-button:hover {
+  background-color: #e2e8f0;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+
+.view-toggle-button:active {
+}
+
+.view-toggle-button.active {
+  background-color: #2196F3;
+  color: white;
+  border-color: #1976D2;
+}
+
+.view-toggle-button.active:hover {
+  background-color: #1976D2;
+  border-color: #1565C0;
+}
+
+.view-icon {
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.view-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.view-text {
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+.view-mode-indicator {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.current-view {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Alternative toggle style - segmented control */
+.view-toggle.segmented {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.25rem;
+  gap: 0;
+}
+
+.view-toggle.segmented .view-toggle-button {
+  background: none;
+  border: none;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0.375rem 0.75rem;
+}
+
+.view-toggle.segmented .view-toggle-button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.view-toggle.segmented .view-toggle-button.active {
+  background-color: white;
+  color: #374151;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.view-toggle.segmented .view-toggle-button.active:hover {
+  background-color: white;
+}
+
+/* Compact style */
+.view-toggle.compact {
+  gap: 0.5rem;
+}
+
+.view-toggle.compact .view-toggle-button {
+  padding: 0.375rem;
+  min-width: 32px;
+  justify-content: center;
+}
+
+.view-toggle.compact .view-text {
+  display: none;
+}
+
+.view-toggle.compact .view-mode-indicator {
+  display: none;
+}
+
+/* Icon-only style */
+.view-toggle.icon-only .view-text {
+  display: none;
+}
+
+.view-toggle.icon-only .view-mode-indicator {
+  display: none;
+}
+
+.view-toggle.icon-only .view-toggle-button {
+  padding: 0.5rem;
+  min-width: 36px;
+  justify-content: center;
+}
+
+/* Focus states */
+.view-toggle-button:focus {
+  outline: 2px solid #2196F3;
+  outline-offset: 2px;
+}
+
+.view-toggle-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Disabled state */
+.view-toggle-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading state */
+.view-toggle-button.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.view-toggle-button.loading .view-icon {
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .view-toggle {
+    gap: 0.5rem;
+  }
+  
+  .toggle-group {
+    padding: 1px;
+  }
+  
+  .toggle-option {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    min-height: 28px;
+  }
+  
+  .toggle-option .view-text {
+    display: none;
+  }
+  
+  .view-toggle-button {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8rem;
+    min-height: 32px;
+  }
+  
+  .view-text {
+    display: none;
+  }
+  
+  .view-mode-indicator {
+    font-size: 0.75rem;
+  }
+  
+  .view-icon {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .view-toggle {
+    gap: 0.25rem;
+  }
+  
+  .toggle-option {
+    padding: 0.25rem;
+    min-width: 32px;
+    min-height: 32px;
+    justify-content: center;
+  }
+  
+  .toggle-option .view-text {
+    display: none;
+  }
+  
+  .view-toggle-button {
+    padding: 0.25rem;
+    min-width: 28px;
+    min-height: 28px;
+  }
+  
+  .view-mode-indicator {
+    display: none;
+  }
+  
+  .view-icon {
+    font-size: 0.8rem;
+  }
+}
+
+
+
+/* Print styles */
+@media print {
+  .view-toggle {
+    display: none;
+  }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .toggle-option {
+    min-height: 44px; /* Minimum touch target size */
+    min-width: 44px;
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .view-toggle-button {
+    min-height: 44px; /* Minimum touch target size */
+    min-width: 44px;
+  }
+  
+  .view-toggle.compact .view-toggle-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Animation for view changes */
+.view-toggle-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.view-toggle-button::before {
+  display: none;
+}
+
+.view-toggle-button.active::before {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .view-toggle-button::before {
+    display: none;
+  }
+}
+
+/* Tooltip support */
+.view-toggle-button[title] {
+  position: relative;
+}
+
+/* Custom variants */
+.view-toggle.primary .view-toggle-button.active {
+  background-color: #2196F3;
+  border-color: #1976D2;
+}
+
+.view-toggle.secondary .view-toggle-button.active {
+  background-color: #64748b;
+  border-color: #475569;
+}
+
+.view-toggle.success .view-toggle-button.active {
+  background-color: #10b981;
+  border-color: #059669;
+}
+
+/* Size variants */
+.view-toggle.small .view-toggle-button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  min-height: 28px;
+}
+
+.view-toggle.large .view-toggle-button {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  min-height: 44px;
+}
+
+.view-toggle.small .view-icon {
+  font-size: 0.875rem;
+}
+
+.view-toggle.large .view-icon {
+  font-size: 1.125rem;
+}
