@@ -1,17 +1,33 @@
 {
-  "name": "test-report-backend",
+  "name": "test-report-dashboard-backend",
   "version": "1.0.0",
   "description": "Backend server for Test Report Dashboard",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "test-report",
+    "dashboard",
+    "file-browser",
+    "api"
+  ],
+  "author": "Test Report Dashboard Team",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "archiver": "^6.0.1",
+    "fs-extra": "^11.1.1",
+    "path": "^0.12.7",
+    "mime-types": "^2.1.35"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
