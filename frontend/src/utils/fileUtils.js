@@ -4,13 +4,22 @@
  * @returns {string} Formatted file size
  */
 export const formatFileSize = (bytes) => {
+  if (bytes === null || bytes === undefined || isNaN(bytes) || bytes < 0) {
+    return 'NaN undefined';
+  }
+  
   if (bytes === 0) return '0 Bytes';
   
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  if (i >= sizes.length) {
+    return Math.floor(bytes / Math.pow(k, sizes.length - 1)) + ' ' + sizes[sizes.length - 1];
+  }
+  
+  const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(2));
+  return formattedSize + ' ' + sizes[i];
 };
 
 /**
@@ -153,4 +162,22 @@ export const getSyntaxLanguage = (filename) => {
   };
   
   return languageMap[extension] || 'text';
+};
+
+/**
+ * Copy text to clipboard
+ * @param {string} text - Text to copy
+ * @returns {Promise<boolean>} Success status
+ */
+export const copyToClipboard = async (text) => {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(String(text));
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('Failed to copy to clipboard:', error);
+    return false;
+  }
 };

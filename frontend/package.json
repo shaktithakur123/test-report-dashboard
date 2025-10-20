@@ -24,6 +24,14 @@
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write src/"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(axios)/)"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -47,7 +55,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "eslint": "^8.53.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "identity-obj-proxy": "^3.0.0"
   },
   "proxy": "http://localhost:8000"
 }

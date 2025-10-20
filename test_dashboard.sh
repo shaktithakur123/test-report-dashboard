@@ -75,6 +75,10 @@ test_api_endpoints() {
     print_status "Testing directory listing (root)..."
     if curl -s -f "$BACKEND_URL/api/list?path=/" | jq . > /dev/null 2>&1; then
         print_success "Root directory listing is working"
+        
+        # Show what's in the root directory
+        print_status "Root directory contents:"
+        curl -s -f "$BACKEND_URL/api/list?path=/" | jq -r '.[] | "  - \(.name) (\(if .isFolder then "folder" else "file" end))"' 2>/dev/null || echo "  (Unable to parse directory contents)"
     else
         print_error "Root directory listing failed"
         return 1
@@ -83,17 +87,41 @@ test_api_endpoints() {
     # Test specific directory listing
     print_status "Testing directory listing (test_pipeline_results)..."
     if curl -s -f "$BACKEND_URL/api/list?path=/test_pipeline_results" | jq . > /dev/null 2>&1; then
-        print_success "Specific directory listing is working"
+        print_success "Test pipeline results directory listing is working"
+        
+        # Show jobs in test_pipeline_results
+        print_status "Available test jobs:"
+        curl -s -f "$BACKEND_URL/api/list?path=/test_pipeline_results" | jq -r '.[] | "  - \(.name)"' 2>/dev/null || echo "  (Unable to parse job list)"
     else
-        print_warning "Specific directory listing failed (may not exist yet)"
+        print_warning "Test pipeline results directory listing failed (may not exist yet)"
+    fi
+    
+    # Test reports directory listing
+    print_status "Testing directory listing (reports)..."
+    if curl -s -f "$BACKEND_URL/api/list?path=/reports" | jq . > /dev/null 2>&1; then
+        print_success "Reports directory listing is working"
+    else
+        print_warning "Reports directory listing failed"
     fi
     
     # Test file content retrieval
     print_status "Testing file content retrieval..."
     if curl -s -f "$BACKEND_URL/api/file?path=/test_pipeline_results/job_12345/integration_test.log" > /dev/null 2>&1; then
         print_success "File content retrieval is working"
+        
+        # Show first few lines of the file
+        print_status "Sample file content (first 3 lines):"
+        curl -s -f "$BACKEND_URL/api/file?path=/test_pipeline_results/job_12345/integration_test.log" | head -n 3 | sed 's/^/  /' 2>/dev/null || echo "  (Unable to retrieve file content)"
     else
         print_warning "File content retrieval failed (file may not exist yet)"
+    fi
+    
+    # Test additional endpoints
+    print_status "Testing item info endpoint..."
+    if curl -s -f "$BACKEND_URL/api/info?path=/test_pipeline_results/job_12345" | jq . > /dev/null 2>&1; then
+        print_success "Item info endpoint is working"
+    else
+        print_warning "Item info endpoint failed"
     fi
     
     print_success "API endpoint testing completed"
@@ -111,7 +139,12 @@ test_downloads() {
     print_status "Testing single file download..."
     if curl -s -f -o "test_file.log" "$BACKEND_URL/api/download?path=/test_pipeline_results/job_12345/integration_test.log"; then
         if [ -f "test_file.log" ] && [ -s "test_file.log" ]; then
-            print_success "Single file download is working"
+            file_size=$(wc -c < "test_file.log")
+            print_success "Single file download is working (${file_size} bytes)"
+            
+            # Show first line of downloaded file
+            print_status "Downloaded file preview:"
+            head -n 1 "test_file.log" | sed 's/^/  /' 2>/dev/null || echo "  (Unable to preview file)"
         else
             print_warning "File downloaded but appears empty"
         fi
@@ -123,11 +156,18 @@ test_downloads() {
     print_status "Testing directory download..."
     if curl -s -f -o "test_directory.tar.gz" "$BACKEND_URL/api/download?path=/test_pipeline_results/job_12345"; then
         if [ -f "test_directory.tar.gz" ] && [ -s "test_directory.tar.gz" ]; then
-            print_success "Directory download is working"
+            archive_size=$(wc -c < "test_directory.tar.gz")
+            print_success "Directory download is working (${archive_size} bytes)"
             
-            # Test archive extraction
+            # Test archive extraction and show contents
             if tar -tzf "test_directory.tar.gz" > /dev/null 2>&1; then
                 print_success "Downloaded archive is valid"
+                
+                print_status "Archive contents:"
+                tar -tzf "test_directory.tar.gz" | head -n 5 | sed 's/^/  /' 2>/dev/null || echo "  (Unable to list archive contents)"
+                
+                file_count=$(tar -tzf "test_directory.tar.gz" | wc -l)
+                print_status "Archive contains ${file_count} items"
             else
                 print_warning "Downloaded archive may be corrupted"
             fi
@@ -136,6 +176,23 @@ test_downloads() {
         fi
     else
         print_warning "Directory download failed (directory may not exist)"
+    fi
+    
+    # Test different file types
+    print_status "Testing different file type downloads..."
+    
+    # Test JSON file download
+    if curl -s -f -o "config.json" "$BACKEND_URL/api/download?path=/test_pipeline_results/job_12346/config.json" 2>/dev/null; then
+        if [ -f "config.json" ] && [ -s "config.json" ]; then
+            print_success "JSON file download is working"
+        fi
+    fi
+    
+    # Test HTML report download
+    if curl -s -f -o "report.html" "$BACKEND_URL/api/download?path=/reports/daily/2024-01-15.html" 2>/dev/null; then
+        if [ -f "report.html" ] && [ -s "report.html" ]; then
+            print_success "HTML report download is working"
+        fi
     fi
     
     # Cleanup
@@ -233,16 +290,31 @@ main() {
     echo ""
     print_status "Next steps:"
     echo "  1. Open $FRONTEND_URL in your browser"
-    echo "  2. Navigate through the test directories"
+    echo "  2. Navigate through the test directories:"
+    echo "     • /reports - Daily, weekly, and monthly test reports"
+    echo "     • /test_pipeline_results - Job results and logs"
+    echo "     • /configs - Configuration files"
+    echo "     • /artifacts - Screenshots and logs"
     echo "  3. View file contents by clicking on files"
-    echo "  4. Download files and folders"
+    echo "  4. Download files and folders (folders become .tar.gz archives)"
     echo "  5. Try switching between grid and list views"
+    echo "  6. Use breadcrumb navigation to move between directories"
+    echo "  7. Right-click items for context menu options"
+    echo ""
+    print_status "Sample files to explore:"
+    echo "  • /test_pipeline_results/job_12345/integration_test.log"
+    echo "  • /reports/daily/2024-01-15.html"
+    echo "  • /configs/test_config.json"
+    echo "  • /artifacts/logs/application.log"
     echo ""
     print_status "To stop the services:"
     echo "  docker-compose down"
     echo ""
     print_status "To view logs:"
     echo "  docker-compose logs -f"
+    echo ""
+    print_status "To rebuild and restart:"
+    echo "  docker-compose down && docker-compose up --build -d"
     echo ""
 }
 
